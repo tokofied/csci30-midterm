@@ -18,6 +18,16 @@ class RingBuffer:
     """A circular queue of floats with a fixed capacity."""
 
     def __init__(self, capacity):
+
+        if capacity < 1:
+            raise ValueError(f"Capacity cannot be less than 1. Received {capacity}")
+
+        self._data = array("d", [0] * capacity)
+        self._front = 0
+        self._rear = 0
+        self._size = 0
+        self._capacity = capacity
+
         """Create an empty buffer that can hold `capacity` items.
 
         Set up four things:
@@ -32,24 +42,50 @@ class RingBuffer:
         raise NotImplementedError("RingBuffer.__init__")
 
     def capacity(self):
+
+        return self._capacity
+
         """The most items this buffer can hold."""
         # TODO (Milestone 2)
         raise NotImplementedError("RingBuffer.capacity")
 
     def size(self):
+
+        return self._size
+
         """How many items are in the buffer right now."""
         # TODO (Milestone 2)
         raise NotImplementedError("RingBuffer.size")
 
     def is_empty(self):
+
+        if self._size == 0:
+            return True
+
         # TODO (Milestone 2)
         raise NotImplementedError("RingBuffer.is_empty")
 
     def is_full(self):
+
+        if self._size == self._capacity:
+            return True
+
         # TODO (Milestone 2)
         raise NotImplementedError("RingBuffer.is_full")
 
     def enqueue(self, x):
+
+        if self.is_full():
+            raise IndexError("Buffer is already full.")
+
+        self._data[self._rear] = x
+
+        if self._rear == self._capacity - 1:
+            self._rear = 0
+        else:
+            self._rear += 1
+        self._size += 1
+
         """Add x at the rear. 
         
         Raise IndexError if the buffer is already full.
@@ -58,6 +94,20 @@ class RingBuffer:
         raise NotImplementedError("RingBuffer.enqueue")
 
     def dequeue(self):
+
+        if self.is_empty():
+            raise IndexError("Buffer is empty.")
+
+        front_item = self._data[self._front]
+
+        if self._front == self._capacity - 1:
+            self._front = 0
+        else:
+            self._front += 1
+        self._size -= 1
+
+        return front_item
+
         """Remove and return the item at the front. 
 
         Raise IndexError if the buffer is empty.
@@ -66,6 +116,12 @@ class RingBuffer:
         raise NotImplementedError("RingBuffer.dequeue")
 
     def peek(self):
+
+        if self.is_empty():
+            raise IndexError("Buffer is empty.")
+
+        return self._data[self._front]
+
         """Return the item at the front without removing it.
 
         Raise IndexError if the buffer is empty.
