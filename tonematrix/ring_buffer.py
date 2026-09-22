@@ -38,40 +38,28 @@ class RingBuffer:
 
         Raise ValueError if capacity is less than 1.
         """
-        # TODO (Milestone 2)
-        raise NotImplementedError("RingBuffer.__init__")
 
     def capacity(self):
 
         return self._capacity
 
         """The most items this buffer can hold."""
-        # TODO (Milestone 2)
-        raise NotImplementedError("RingBuffer.capacity")
 
     def size(self):
 
         return self._size
 
         """How many items are in the buffer right now."""
-        # TODO (Milestone 2)
-        raise NotImplementedError("RingBuffer.size")
 
     def is_empty(self):
 
         if self._size == 0:
             return True
 
-        # TODO (Milestone 2)
-        raise NotImplementedError("RingBuffer.is_empty")
-
     def is_full(self):
 
         if self._size == self._capacity:
             return True
-
-        # TODO (Milestone 2)
-        raise NotImplementedError("RingBuffer.is_full")
 
     def enqueue(self, x):
 
@@ -90,8 +78,6 @@ class RingBuffer:
         
         Raise IndexError if the buffer is already full.
         """
-        # TODO (Milestone 3)
-        raise NotImplementedError("RingBuffer.enqueue")
 
     def dequeue(self):
 
@@ -112,8 +98,6 @@ class RingBuffer:
 
         Raise IndexError if the buffer is empty.
         """
-        # TODO (Milestone 3)
-        raise NotImplementedError("RingBuffer.dequeue")
 
     def peek(self):
 
@@ -126,8 +110,6 @@ class RingBuffer:
 
         Raise IndexError if the buffer is empty.
         """
-        # TODO (Milestone 3)
-        raise NotImplementedError("RingBuffer.peek")
 
     def __len__(self):
         """So that len(buffer) works. Provided, once size() works."""
